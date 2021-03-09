@@ -1,0 +1,14 @@
+org/sharextras/webscripts/connector/OAuth2Credentials.class
+org/sharextras/webscripts/connector/MyAlfrescoApiConnector.class
+org/sharextras/webscripts/connector/HttpOAuthConnector.class
+org/sharextras/webscripts/OAuth2Return.class
+org/sharextras/webscripts/OAuthReturn.class
+org/sharextras/webscripts/connector/HttpOAuth2QueryStringConnector.class
+org/sharextras/webscripts/connector/MyAlfrescoApiConnector$NoOriginRequest.class
+org/sharextras/webscripts/connector/TokenRefreshException.class
+org/sharextras/webscripts/connector/AuthorizationPassthruConnector.class
+org/sharextras/webscripts/connector/OAuth2CredentialVaultProvider.class
+org/sharextras/webscripts/connector/OAuth2CredentialVault.class
+org/sharextras/webscripts/connector/OAuth2AuthenticatingConnector.class
+org/sharextras/webscripts/connector/HttpOAuth2Connector.class
+org/sharextras/webscripts/connector/OAuth2Authenticator.class

@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file docker-compose.yml convert
+    kompose.version: 1.7.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: solr6
+  name: solr6
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: solr6
+    spec:
+      containers:
+      - env:
+        - name: SOLR_ALFRESCO_HOST
+          value: alfresco
+        - name: SOLR_ALFRESCO_PORT
+          value: "8080"
+        - name: SOLR_CREATE_ALFRESCO_DEFAULTS
+          value: alfresco,archive
+        - name: SOLR_JAVA_MEM
+          value: -Xms2g -Xmx2g
+        - name: SOLR_SOLR_HOST
+          value: solr6
+        - name: SOLR_SOLR_PORT
+          value: "8983"
+        image: alfresco/alfresco-search-services:1.3.0.1
+        name: solr6
+        ports:
+        - containerPort: 8983
+        resources:
+          limits:
+            memory: "2147483648"
+      restartPolicy: Always
+status: {}

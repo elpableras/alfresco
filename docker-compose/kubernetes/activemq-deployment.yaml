@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file docker-compose.yml convert
+    kompose.version: 1.7.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: activemq
+  name: activemq
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: activemq
+    spec:
+      containers:
+      - image: alfresco/alfresco-activemq:5.15.8
+        name: activemq
+        ports:
+        - containerPort: 8161
+        - containerPort: 5672
+        - containerPort: 61616
+        - containerPort: 61613
+        resources:
+          limits:
+            memory: "1073741824"
+      restartPolicy: Always
+status: {}

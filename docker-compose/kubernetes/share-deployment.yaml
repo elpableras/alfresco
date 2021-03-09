@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file docker-compose.yml convert
+    kompose.version: 1.7.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: share
+  name: share
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: share
+    spec:
+      containers:
+      - env:
+        - name: JAVA_OPTS
+          value: ' -Xms500m -Xmx500m -Dalfresco.host=localhost -Dalfresco.port=8080
+            -Dalfresco.context=alfresco -Dalfresco.protocol=http '
+        - name: REPO_HOST
+          value: alfresco
+        - name: REPO_PORT
+          value: "8080"
+        image: alfresco/alfresco-share:6.1.0-RC3
+        name: share
+        resources:
+          limits:
+            memory: "1073741824"
+      restartPolicy: Always
+status: {}

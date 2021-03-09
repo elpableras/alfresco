@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    kompose.cmd: kompose --provider openshift --file docker-compose.yml convert
+    kompose.version: 1.7.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: proxy
+  name: proxy
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: proxy
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: proxy
+    spec:
+      containers:
+      - image: ' '
+        name: proxy
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            memory: "134217728"
+      restartPolicy: Always
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - proxy
+      from:
+        kind: ImageStreamTag
+        name: proxy:1.0.0
+    type: ImageChange
+status: {}

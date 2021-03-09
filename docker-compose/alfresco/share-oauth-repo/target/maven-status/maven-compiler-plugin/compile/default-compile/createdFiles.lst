@@ -1,0 +1,3 @@
+org/sharextras/oauth/repo/webscripts/GetOAuthToken.class
+org/sharextras/oauth/repo/webscripts/SaveOAuthToken.class
+org/sharextras/oauth/repo/webscripts/DeleteOAuthToken.class

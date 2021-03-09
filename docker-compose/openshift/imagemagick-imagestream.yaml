@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ImageStream
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: imagemagick
+  name: imagemagick
+spec:
+  tags:
+  - annotations: null
+    from:
+      kind: DockerImage
+      name: alfresco/alfresco-imagemagick:2.1.0-EA4
+    generation: null
+    importPolicy: {}
+    name: 2.1.0-EA4
+status:
+  dockerImageRepository: ""

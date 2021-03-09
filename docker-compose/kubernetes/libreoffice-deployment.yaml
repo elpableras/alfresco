@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file docker-compose.yml convert
+    kompose.version: 1.7.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: libreoffice
+  name: libreoffice
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: libreoffice
+    spec:
+      containers:
+      - env:
+        - name: JAVA_OPTS
+          value: ' -Xms256m -Xmx512m'
+        image: alfresco/alfresco-libreoffice:2.1.0-EA4
+        name: libreoffice
+        ports:
+        - containerPort: 8090
+        resources:
+          limits:
+            memory: "1073741824"
+      restartPolicy: Always
+status: {}

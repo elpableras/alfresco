@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose --file docker-compose.yml convert
+    kompose.version: 1.7.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: libreoffice
+  name: libreoffice
+spec:
+  ports:
+  - name: "8092"
+    port: 8092
+    targetPort: 8090
+  selector:
+    io.kompose.service: libreoffice
+status:
+  loadBalancer: {}

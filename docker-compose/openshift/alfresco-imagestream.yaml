@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ImageStream
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: alfresco
+  name: alfresco
+spec:
+  tags:
+  - annotations: null
+    from:
+      kind: DockerImage
+      name: alfresco/alfresco-content-repository-community:6.2.0-A3
+    generation: null
+    importPolicy: {}
+    name: 6.2.0-A3
+status:
+  dockerImageRepository: ""

@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    kompose.cmd: kompose --provider openshift --file docker-compose.yml convert
+    kompose.version: 1.7.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: activemq
+  name: activemq
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: activemq
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: activemq
+    spec:
+      containers:
+      - image: ' '
+        name: activemq
+        ports:
+        - containerPort: 8161
+        - containerPort: 5672
+        - containerPort: 61616
+        - containerPort: 61613
+        resources:
+          limits:
+            memory: "1073741824"
+      restartPolicy: Always
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - activemq
+      from:
+        kind: ImageStreamTag
+        name: activemq:5.15.8
+    type: ImageChange
+status: {}

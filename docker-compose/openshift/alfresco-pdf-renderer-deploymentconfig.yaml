@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    kompose.cmd: kompose --provider openshift --file docker-compose.yml convert
+    kompose.version: 1.7.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: alfresco-pdf-renderer
+  name: alfresco-pdf-renderer
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: alfresco-pdf-renderer
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: alfresco-pdf-renderer
+    spec:
+      containers:
+      - env:
+        - name: JAVA_OPTS
+          value: ' -Xms256m -Xmx512m'
+        image: ' '
+        name: alfresco-pdf-renderer
+        ports:
+        - containerPort: 8090
+        resources:
+          limits:
+            memory: "1073741824"
+      restartPolicy: Always
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - alfresco-pdf-renderer
+      from:
+        kind: ImageStreamTag
+        name: alfresco-pdf-renderer:2.1.0-EA4
+    type: ImageChange
+status: {}

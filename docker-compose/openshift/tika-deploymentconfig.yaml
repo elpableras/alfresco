@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    kompose.cmd: kompose --provider openshift --file docker-compose.yml convert
+    kompose.version: 1.7.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: tika
+  name: tika
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: tika
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: tika
+    spec:
+      containers:
+      - env:
+        - name: JAVA_OPTS
+          value: ' -Xms256m -Xmx512m'
+        image: ' '
+        name: tika
+        ports:
+        - containerPort: 8090
+        resources:
+          limits:
+            memory: "1073741824"
+      restartPolicy: Always
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - tika
+      from:
+        kind: ImageStreamTag
+        name: tika:2.1.0-EA4
+    type: ImageChange
+status: {}

@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file docker-compose.yml convert
+    kompose.version: 1.7.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: postgres
+  name: postgres
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: postgres
+    spec:
+      containers:
+      - args:
+        - postgres
+        - -c
+        - max_connections=300
+        - -c
+        - log_min_messages=LOG
+        env:
+        - name: POSTGRES_DB
+          value: alfresco
+        - name: POSTGRES_PASSWORD
+          value: alfresco
+        - name: POSTGRES_USER
+          value: alfresco
+        image: postgres:11.4
+        name: postgres
+        ports:
+        - containerPort: 5432
+        resources:
+          limits:
+            memory: "536870912"
+      restartPolicy: Always
+status: {}
